@@ -4,45 +4,53 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Presión arterial — Adolescentes 10–17</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #e0f7fa; font-size: 18px; }
-    label { display: block; margin-top: 15px; font-weight: bold; }
-    input, select, button { padding: 10px; width: 250px; font-size: 18px; border-radius: 5px; border: 1px solid #ccc; }
-    button { background-color: #0288d1; color: white; cursor: pointer; margin-top: 20px; }
+    body { font-family: 'Quicksand', sans-serif; margin: 0; background-color: #e0f7fa; font-size: 18px; color: #333; }
+    header { background-color: #0288d1; color: white; padding: 20px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    h1 { margin: 0; font-size: 28px; }
+    main { max-width: 600px; background: white; margin: 30px auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 15px; font-weight: 600; }
+    input, select { padding: 10px; width: 100%; font-size: 18px; border-radius: 8px; border: 1px solid #ccc; margin-top: 5px; box-sizing: border-box; }
+    button { background-color: #0288d1; color: white; cursor: pointer; margin-top: 20px; padding: 12px; width: 100%; font-size: 18px; border-radius: 8px; border: none; font-weight: 600; }
     button:hover { background-color: #0277bd; }
-    .result { margin-top: 30px; font-weight: bold; font-size: 22px; }
+    .result { margin-top: 30px; font-weight: bold; font-size: 22px; text-align: center; }
     .ok { color: green; }
     .bad { color: red; }
+    .info { text-align: center; margin-top: 10px; font-size: 16px; color: #555; }
   </style>
 </head>
 <body>
-  <h1>Clasificador de Presión Arterial (10–17 años)</h1>
-  <form id="form">
-    <label>Edad:
-      <select id="edad"></select>
-    </label>
-    <label>Sexo:
-      <select id="sexo">
-        <option value="">—</option>
-        <option value="F">Mujer</option>
-        <option value="M">Hombre</option>
-      </select>
-    </label>
-    <label>Talla (cm):
-      <input type="number" id="talla" />
-    </label>
-    <label>PA Sistólica (mmHg):
-      <input type="number" id="sis" />
-    </label>
-    <label>PA Diastólica (mmHg):
-      <input type="number" id="dia" />
-    </label>
-    <button type="button" id="analizar">Analizar</button>
-  </form>
-  <div class="result" id="resultado"></div>
-  <div id="umbral"></div>
-  <div id="tallaUsada"></div>
-
+  <header>
+    <h1>Clasificador de Presión Arterial (10–17 años)</h1>
+  </header>
+  <main>
+    <form id="form">
+      <label>Edad:
+        <select id="edad"></select>
+      </label>
+      <label>Sexo:
+        <select id="sexo">
+          <option value="">—</option>
+          <option value="F">Mujer</option>
+          <option value="M">Hombre</option>
+        </select>
+      </label>
+      <label>Talla (cm):
+        <input type="number" id="talla" />
+      </label>
+      <label>PA Sistólica (mmHg):
+        <input type="number" id="sis" />
+      </label>
+      <label>PA Diastólica (mmHg):
+        <input type="number" id="dia" />
+      </label>
+      <button type="button" id="analizar">Analizar</button>
+    </form>
+    <div class="result" id="resultado"></div>
+    <div class="info" id="umbral"></div>
+    <div class="info" id="tallaUsada"></div>
+  </main>
 <script>
 const datos = {
   F: {
