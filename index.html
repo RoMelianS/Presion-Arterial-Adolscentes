@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Presión arterial — Adolescentes 10–17</title>
   <style>
-    body { font-family: sans-serif; margin: 20px; }
-    label { display: block; margin-top: 10px; }
-    input, select { padding: 5px; width: 200px; }
-    .result { margin-top: 20px; font-weight: bold; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #e0f7fa; font-size: 18px; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, button { padding: 10px; width: 250px; font-size: 18px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: #0288d1; color: white; cursor: pointer; margin-top: 20px; }
+    button:hover { background-color: #0277bd; }
+    .result { margin-top: 30px; font-weight: bold; font-size: 22px; }
     .ok { color: green; }
     .bad { color: red; }
   </style>
@@ -35,8 +37,9 @@
     <label>PA Diastólica (mmHg):
       <input type="number" id="dia" />
     </label>
+    <button type="button" id="analizar">Analizar</button>
   </form>
-  <div class="result" id="resultado">Complete todos los campos…</div>
+  <div class="result" id="resultado"></div>
   <div id="umbral"></div>
   <div id="tallaUsada"></div>
 
@@ -72,7 +75,7 @@ for (let i = 10; i <= 17; i++) {
   edadSel.appendChild(opt);
 }
 
-[edadSel, sexoSel, talla, sis, dia].forEach(el => el.addEventListener('input', evaluar));
+document.getElementById('analizar').addEventListener('click', evaluar);
 
 function evaluar() {
   const edad = parseInt(edadSel.value);
@@ -83,6 +86,9 @@ function evaluar() {
 
   if (!edad || !sexo || isNaN(tallaVal) || isNaN(sisVal) || isNaN(diaVal)) {
     document.getElementById('resultado').textContent = 'Complete todos los campos…';
+    document.getElementById('resultado').className = 'result';
+    document.getElementById('umbral').textContent = '';
+    document.getElementById('tallaUsada').textContent = '';
     return;
   }
 
@@ -100,8 +106,10 @@ function evaluar() {
 
   if (sisVal >= sys90 || diaVal >= dia90) {
     document.getElementById('resultado').innerHTML = `<span class='bad'>ANORMAL</span>`;
+    document.getElementById('resultado').className = 'result bad';
   } else {
     document.getElementById('resultado').innerHTML = `<span class='ok'>NORMAL</span>`;
+    document.getElementById('resultado').className = 'result ok';
   }
 }
 </script>
